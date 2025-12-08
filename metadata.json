@@ -1,0 +1,5 @@
+{
+  "description": "An AI tool to that catalogs and analyzes brand elements from names, logos, colors, slogans, characters along with trademark status.",
+  "requestFramePermissions": [],
+  "name": "Brand Element Analyzer"
+}
