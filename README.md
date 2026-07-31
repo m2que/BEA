@@ -15,6 +15,14 @@ View your app in AI Studio: https://ai.studio/apps/drive/1w2I91pwADLufDImax74N3C
 
 1. Install dependencies:
    `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+2. Copy `.env.example` to `.env.local` and set `GEMINI_API_KEY`
+3. Start the local API server:
+   `npm run dev:api`
+4. In a second terminal, start the client:
+   `npm run dev:client`
+
+## Notes
+
+- The Gemini API key is now read server-side from the local environment and is not injected into browser code.
+- `npm run dev:api` runs a local Node server for `POST /api/bea` and loads `.env.local` before calling the existing API handler.
+- Do not commit real `.env` files. Keep only placeholder values in `.env.example`.
