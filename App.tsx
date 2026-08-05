@@ -95,6 +95,35 @@ const App: React.FC = () => {
           </div>
         ) : null}
 
+        <section className="panel support-card">
+          <div className="section-heading">
+            <div>
+              <p className="eyebrow">What Is Included</p>
+              <h2>Brand elements scan</h2>
+            </div>
+          </div>
+
+          <div className="support-card-grid">
+            <article className="support-card-item">
+              <strong>Core identity</strong>
+              <p>Name fit, logo direction, slogan clarity, and memorability cues.</p>
+            </article>
+            <article className="support-card-item">
+              <strong>Sensory signals</strong>
+              <p>Color systems, packaging cues, mascots, and sonic presence where available.</p>
+            </article>
+            <article className="support-card-item">
+              <strong>Competitive readout</strong>
+              <p>Side-by-side score snapshots to spot stronger and weaker brand assets fast.</p>
+            </article>
+          </div>
+
+          <div className="support-reference-callout">
+            <strong>Linked and verified references are included in the output.</strong>
+            <p>Use the source links to trace findings back to official brand materials, business coverage, and industry references.</p>
+          </div>
+        </section>
+
         <footer className="page-footer">
           <p>
             &copy; 2026{' '}
