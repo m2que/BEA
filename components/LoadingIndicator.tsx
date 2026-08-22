@@ -1,6 +1,4 @@
 import React from 'react';
-import { SearchSparkIcon, SignalIcon } from './icons';
-
 interface LoadingIndicatorProps {
   brandCount: number;
 }
@@ -36,16 +34,6 @@ const LoadingIndicator: React.FC<LoadingIndicatorProps> = ({ brandCount }) => {
       <p>
         Be patient - analysis is running and needs a minute or so.
       </p>
-      <div className="status-steps" aria-hidden="true">
-        <div className="status-step">
-          <SearchSparkIcon className="status-step-icon" />
-          <span>Finding source material for {brandCount} brand{brandCount === 1 ? '' : 's'}</span>
-        </div>
-        <div className="status-step">
-          <SignalIcon className="status-step-icon" />
-          <span>Scoring brand elements</span>
-        </div>
-      </div>
     </section>
   );
 };

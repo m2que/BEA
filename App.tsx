@@ -53,6 +53,14 @@ const App: React.FC = () => {
   const hasResults = !isLoading && analysisResults.length > 0;
   const previewMode = new URLSearchParams(window.location.search).get('preview');
 
+  const handleRunNewAnalysis = useCallback(() => {
+    setRequestedBrandName('');
+    setError(null);
+    setAnalysisResults([]);
+    setBrandCount(0);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+
   if (previewMode === 'template') {
     return <TemplateGuidePage />;
   }
@@ -94,6 +102,12 @@ const App: React.FC = () => {
             {competitorErrors.map((result) => (
               <ErrorDisplay key={result.brandName} message={`Analysis failed for ${result.brandName}: ${result.error}`} />
             ))}
+            <div className="results-reset-row">
+              <button type="button" className="results-reset-button" onClick={handleRunNewAnalysis}>
+                <ChartBarIcon aria-hidden="true" />
+                <span>Run New Analysis</span>
+              </button>
+            </div>
           </div>
         ) : null}
 

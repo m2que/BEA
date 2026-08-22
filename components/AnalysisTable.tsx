@@ -228,8 +228,7 @@ const AnalysisTable: React.FC<AnalysisTableProps> = ({ brandElements, brandName,
     <section className="panel">
       <div className="section-heading">
         <div>
-          <p className="eyebrow">Detailed analysis</p>
-          <h2>Element-by-element readout</h2>
+          <h2>Detailed analysis</h2>
         </div>
         {industry ? <span className="industry-pill">Industry context: {industry}</span> : null}
       </div>

@@ -224,6 +224,30 @@ textarea {
   gap: 24px;
 }
 
+.results-reset-row {
+  display: flex;
+  justify-content: center;
+}
+
+.results-reset-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 0 18px;
+  border: 1px solid #c7d2fe;
+  border-radius: 999px;
+  background: #eef2ff;
+  color: #1e1b4b;
+  font-weight: 800;
+}
+
+.results-reset-button svg {
+  width: 18px;
+  height: 18px;
+}
+
 .report-hero-grid,
 .competitive-overview-grid,
 .support-card-grid {
@@ -344,9 +368,9 @@ textarea {
 }
 
 .industry-pill {
-  border: 1px solid #99f6e4;
-  background: #ecfeff;
-  color: #0f766e;
+  border: 1px solid #c7d2fe;
+  background: #eef2ff;
+  color: #4338ca;
 }
 
 .competitive-table {
@@ -560,7 +584,7 @@ textarea {
 
 .loading-elapsed {
   margin-top: 8px;
-  font-weight: 700;
+  font-weight: 400;
   color: #334155;
 }
 
