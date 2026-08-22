@@ -5,10 +5,11 @@ import CompetitiveLandscape from './components/CompetitiveLandscape';
 import ErrorDisplay from './components/ErrorDisplay';
 import LoadingIndicator from './components/LoadingIndicator';
 import MarketLearnHeader from './components/MarketLearnHeader';
+import TemplateGuidePage from './components copy/TemplateGuidePage';
 import { AVAILABLE_MODELS, DEFAULT_MODEL, analyzeBrands } from './services/geminiService.ts';
 import { buildAnalyzeBrandsPayload } from './lib/bea.ts';
 import type { AnalysisResult, GeminiModelOption } from './types.ts';
-import { SparkIcon } from './components/icons';
+import { ChartBarIcon } from './components/icons';
 
 const App: React.FC = () => {
   const [requestedBrandName, setRequestedBrandName] = useState('');
@@ -50,6 +51,11 @@ const App: React.FC = () => {
 
   const competitorErrors = analysisResults.filter((result) => result.error && result.brandName !== requestedBrandName);
   const hasResults = !isLoading && analysisResults.length > 0;
+  const previewMode = new URLSearchParams(window.location.search).get('preview');
+
+  if (previewMode === 'template') {
+    return <TemplateGuidePage />;
+  }
 
   return (
     <div className="app-shell">
@@ -57,9 +63,7 @@ const App: React.FC = () => {
       <main className="page-content">
         <MarketLearnHeader
           title="Brand Elements Analyzer"
-          description="Evaluate brand elements with detailed analysis, strategic interpretation, and references. The linked brand sources, business coverage, and industry materials can support reports and business plans."
-          howToTitle="Reports, case studies, and presentations"
-          howToDescription="Start with one brand, see the element logic, then turn the findings into evidence for reports and business plans."
+          description="Evaluate a company’s brand elements across offensive and defensive criteria to assess how effectively they work together to build recognition, meaning, distinction, and defensibility. Each output includes links to source materials and a detailed analysis with references that may be used as evidence in reports and business plans."
         />
 
         <BrandInputForm
@@ -74,13 +78,11 @@ const App: React.FC = () => {
         {error ? <ErrorDisplay message={error} /> : null}
 
         {!isLoading && !error && analysisResults.length === 0 ? (
-          <section className="panel empty-state-panel">
-            <div className="empty-state-icon"><SparkIcon /></div>
-            <p className="eyebrow">Ready for analysis</p>
-            <h2>Start with one brand, then expand to competitors when you need contrast.</h2>
+          <section className="template-guide-ready-card empty-state-panel">
+            <div className="template-guide-ready-icon empty-state-icon"><ChartBarIcon /></div>
+            <p className="template-guide-card-label eyebrow">Ready to Analyze</p>
             <p>
-              A strong first test is a widely documented consumer brand with a clear website, visible packaging,
-              and known competitors.
+              Start with a brand with a clear website, visible packaging, and known competitors, then expand to competitors when you need contrast.
             </p>
           </section>
         ) : null}
@@ -94,35 +96,6 @@ const App: React.FC = () => {
             ))}
           </div>
         ) : null}
-
-        <section className="panel support-card">
-          <div className="section-heading">
-            <div>
-              <p className="eyebrow">What Is Included</p>
-              <h2>Brand elements scan</h2>
-            </div>
-          </div>
-
-          <div className="support-card-grid">
-            <article className="support-card-item">
-              <strong>Core identity</strong>
-              <p>Name fit, logo direction, slogan clarity, and memorability cues.</p>
-            </article>
-            <article className="support-card-item">
-              <strong>Sensory signals</strong>
-              <p>Color systems, packaging cues, mascots, and sonic presence where available.</p>
-            </article>
-            <article className="support-card-item">
-              <strong>Competitive readout</strong>
-              <p>Side-by-side score snapshots to spot stronger and weaker brand assets fast.</p>
-            </article>
-          </div>
-
-          <div className="support-reference-callout">
-            <strong>Linked and verified references are included in the output.</strong>
-            <p>Use the source links to trace findings back to official brand materials, business coverage, and industry references.</p>
-          </div>
-        </section>
 
         <footer className="page-footer">
           <p>

@@ -1,47 +1,51 @@
 import React from 'react';
-import { ChartBarIcon, LayersIcon } from './icons';
+import { BrandElementIcon, ChartBarIcon } from './icons';
 import IconTile from './IconTile';
 
 interface MarketLearnHeaderProps {
   title: string;
   description: string;
-  howToTitle: string;
-  howToDescription: string;
 }
 
 const MarketLearnHeader: React.FC<MarketLearnHeaderProps> = ({
   title,
-  description,
-  howToTitle,
-  howToDescription
+  description
 }) => {
   return (
-    <header className="panel page-header">
-      <div className="page-header-copy">
-        <div className="header-badge">
-          <ChartBarIcon className="header-badge-icon" />
-          <span>MarketLearn Featured Tool</span>
-        </div>
-        <div>
-          <a href="https://marketlearn.online" className="back-link-pill">
-            Back to MarketLearn
+    <>
+      <header className="template-guide-topbar marketlearn-topbar">
+        <div className="template-guide-shell template-guide-topbar-inner marketlearn-topbar-inner">
+          <a className="template-guide-marketlearn-link marketlearn-topbar-link" href="https://marketlearn.online" target="_blank" rel="noreferrer">
+            <span className="template-guide-marketlearn-icon marketlearn-topbar-icon">
+              <ChartBarIcon className="header-badge-icon" />
+            </span>
+            <span>MarketLearn</span>
           </a>
         </div>
-        <h1>{title}</h1>
-        <p>{description}</p>
-      </div>
+      </header>
 
-      <div className="page-header-aside">
-        <article className="header-note-card">
-          <IconTile className="header-note-icon"><LayersIcon /></IconTile>
-          <div>
-            <span>HOW TO USE IT</span>
-            <strong>{howToTitle}</strong>
-            <p>{howToDescription}</p>
-          </div>
-        </article>
-      </div>
-    </header>
+      <section className="template-guide-overview-card page-header">
+        <div className="template-guide-overview-copy page-header-copy">
+          <h1>{title}</h1>
+          <p className="template-guide-lead">{description}</p>
+        </div>
+
+        <div className="page-header-aside">
+          <article className="template-guide-how-card header-note-card">
+            <div className="template-guide-how-header how-to-use-stack">
+              <IconTile className="template-guide-how-icon header-note-icon"><BrandElementIcon /></IconTile>
+              <p className="template-guide-eyebrow">How To Use It</p>
+            </div>
+
+            <div className="template-guide-instruction-copy">
+              <p><strong>Primary Analysis:</strong> Enter a company or brand name to obtain an inventory of its brand elements and analysis.</p>
+              <p><strong>Competitor Comparison:</strong> Optionally enter a rival brand to compare the inventory of elements side by side.</p>
+              <p><strong>Deep Dive:</strong> Run a follow-up, standalone analysis to evaluate the competitor&apos;s elements.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+    </>
   );
 };
 

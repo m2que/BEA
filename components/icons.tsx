@@ -89,3 +89,9 @@ export const ChartBarIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => 
     <line x1="6" y1="20" x2="6" y2="16"></line>
   </AppIcon>
 );
+
+export const BrandElementIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+  <AppIcon strokeWidth={1.8} {...props}>
+    <path d="M12 0.6c1.18 2.92 2.92 5.05 4.7 7.22 1.82 2.22 3.68 4.5 3.68 7.34A8 8 0 0 1 12 23a8 8 0 0 1-8-7.84c0-2.84 1.86-5.12 3.68-7.34C9.08 5.65 10.82 3.52 12 0.6Z" />
+  </AppIcon>
+);

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import type { GeminiModelOption, ModelOption } from '../types.ts';
 import IconBadge from './IconBadge';
+import { ChartBarIcon } from './icons';
 
 interface BrandInputFormProps {
   isLoading: boolean;
@@ -42,32 +43,34 @@ const BrandInputForm: React.FC<BrandInputFormProps> = ({ isLoading, model, model
   return (
     <div className="input-section-stack">
       <form onSubmit={handleSubmit} className="input-form-wrap">
-        <div className="input-shell cbbe-style-input-shell">
-          <div className="cbbe-style-input-intro">
-            <div>
-              <IconBadge label="Brand Elements Analyzer" className="input-badge-compact" />
-              <p className="cbbe-style-input-kicker">Enter a brand, choose a model, and generate the analysis.</p>
+        <div className="template-guide-input-card input-shell cbbe-style-input-shell">
+          <div className="template-guide-card-head cbbe-style-input-intro">
+            <div className="template-guide-card-title-wrap">
+              <IconBadge label="Brand Elements Analyzer Input" className="input-badge-compact" />
             </div>
+            <p className="cbbe-style-input-kicker">Enter a brand, choose a model, and generate the analysis.</p>
           </div>
 
-          <div className="cbbe-style-input-grid">
-            <label className="cbbe-style-field cbbe-style-field-main">
+          <div className="template-guide-form-grid cbbe-style-input-grid">
+            <label className="template-guide-field template-guide-field-wide cbbe-style-field cbbe-style-field-main">
               <span>Brand Name</span>
-              <input
-                type="text"
-                value={brandName}
-                onChange={(event) => {
-                  setBrandName(event.target.value);
-                  setInputError(null);
-                }}
-                placeholder="Enter a brand name (e.g., Nike, Apple, Coca-Cola)"
-                maxLength={200}
-                disabled={isLoading}
-                onKeyDown={preventEnterSubmit}
-              />
+              <div className="template-guide-input-wrap">
+                <input
+                  type="text"
+                  value={brandName}
+                  onChange={(event) => {
+                    setBrandName(event.target.value);
+                    setInputError(null);
+                  }}
+                  placeholder="Enter a brand name (e.g., Nike, Apple, Coca-Cola)"
+                  maxLength={200}
+                  disabled={isLoading}
+                  onKeyDown={preventEnterSubmit}
+                />
+              </div>
             </label>
 
-            <label className="cbbe-style-model-field">
+            <label className="template-guide-field cbbe-style-model-field">
               <span>Model</span>
               <select
                 value={model}
@@ -80,25 +83,30 @@ const BrandInputForm: React.FC<BrandInputFormProps> = ({ isLoading, model, model
                   </option>
                 ))}
               </select>
-              {!inputError ? <small>{models.find((option) => option.value === model)?.description}</small> : null}
+              {!inputError ? <small className="template-guide-field-note">{models.find((option) => option.value === model)?.description}</small> : null}
             </label>
 
-            <button type="submit" disabled={isLoading} className="cbbe-style-submit-button">
-              {isLoading ? 'Analyzing...' : 'Analyze'}
-            </button>
+            <div className="template-guide-action-cell">
+              <button type="submit" disabled={isLoading} className="cbbe-style-submit-button">
+                <ChartBarIcon aria-hidden="true" />
+                {isLoading ? 'Analyzing...' : 'Analyze'}
+              </button>
+            </div>
           </div>
 
-          <label className="support-competitor-field support-competitor-field-dark">
+          <label className="template-guide-field support-competitor-field support-competitor-field-dark">
             <span>Competitors</span>
-            <input
-              type="text"
-              value={competitors}
-              onChange={(event) => setCompetitors(event.target.value)}
-              onKeyDown={preventEnterSubmit}
-              placeholder="Optional: Pepsi, Dr Pepper"
-              disabled={isLoading}
-            />
-            <small>Optional. Separate each competitor with a comma for a quick comparison table.</small>
+            <div className="template-guide-input-wrap">
+              <input
+                type="text"
+                value={competitors}
+                onChange={(event) => setCompetitors(event.target.value)}
+                onKeyDown={preventEnterSubmit}
+                placeholder="Optional: Pepsi, Dr Pepper"
+                disabled={isLoading}
+              />
+            </div>
+            <small className="template-guide-field-note">Optional. Separate each competitor with a comma for a quick comparison table.</small>
           </label>
 
           {inputError ? <p className="cbbe-style-input-error">{inputError}</p> : null}

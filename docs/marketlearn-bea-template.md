@@ -4,7 +4,7 @@ This file is a BEA-safe reference for future MarketLearn app builds.
 
 Purpose:
 - preserve the MarketLearn-style shell and layout logic
-- keep BEA as Brand Element Analyzer
+- keep BEA as Brand Elements Analyzer
 - improve accuracy for future rebuilds without copying CBBE product purpose
 
 Do not use this template to:
@@ -46,7 +46,7 @@ Right instructional card:
 ## BEA Product Copy Pattern
 
 Title:
-- `Brand Element Analyzer (BEA)`
+- `Brand Elements Analyzer (BEA)`
 
 Description should cover:
 - naming

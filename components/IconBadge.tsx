@@ -1,5 +1,5 @@
 import React from 'react';
-import { LayersIcon } from './icons';
+import { BrandElementIcon } from './icons';
 import IconTile from './IconTile';
 
 interface IconBadgeProps {
@@ -11,7 +11,7 @@ const IconBadge: React.FC<IconBadgeProps> = ({ label, className = '' }) => {
   return (
     <div className={`input-badge ${className}`.trim()}>
       <IconTile className="input-badge-tile">
-        <LayersIcon />
+        <BrandElementIcon />
       </IconTile>
       <span>{label}</span>
     </div>
