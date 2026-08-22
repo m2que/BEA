@@ -111,7 +111,9 @@ const sanitizeJsonText = (text: string) => {
   return text
     .replace(/,\s*([}\]])/g, '$1')
     .replace(/[\u201C\u201D]/g, '"')
-    .replace(/[\u2018\u2019]/g, "'");
+    .replace(/[\u2018\u2019]/g, "'")
+    .replace(/\b(\d+)\s*-\s*(\d+)\b/g, '"$1-$2"')
+    .replace(/:\s*0-5/g, ': "0-5"');
 };
 
 const hexToRgb = (hex: string): string | null => {
@@ -257,6 +259,67 @@ const parseInventoryResponse = (jsonText: string): InventoryData => {
   };
 };
 
+const buildFallbackInventoryData = (brandName: string): InventoryData => ({
+  industry: '',
+  brand_elements: {
+    name: { value: brandName, meaning: '', memorability_score: 0, fit_score: 0 },
+    logo_symbol: { description: '', colors: [], distinctiveness_score: 0, consistency_score: 0, logo_urls: [] },
+    slogan_tagline: { value: '', message: '', clarity_score: 0, ownability_score: 0 },
+    characters_mascots: { exist: false, role: '', affinity_score: 0 },
+    sonic_assets: { exist: false, description: '', recall_score: 0, audio_url: '' },
+    packaging: { visuals: '', functional_features: '', premium_cues: '', cue_strength_score: 0 },
+    urls_domains: { primary: '', alternates: [], clarity_score: 0 },
+    brand_protection: {
+      trademarks: { status: '', details: '' },
+      patents: { status: '', details: '' }
+    }
+  },
+  references: createEmptyReferences(),
+  notes: []
+});
+
+const coerceScoredObject = (value: unknown, fallback: Record<string, unknown>) => {
+  return value && typeof value === 'object' && !Array.isArray(value)
+    ? { ...fallback, ...(value as Record<string, unknown>) }
+    : fallback;
+};
+
+const salvageInventoryResponse = (text: string, brandName: string): InventoryData | null => {
+  const normalized = sanitizeJsonText(text);
+  const fallback = buildFallbackInventoryData(brandName);
+
+  const extractString = (regex: RegExp) => normalized.match(regex)?.[1]?.trim() || '';
+  const extractNumber = (regex: RegExp) => {
+    const raw = normalized.match(regex)?.[1];
+    const parsed = raw ? Number.parseFloat(raw) : NaN;
+    return Number.isFinite(parsed) ? parsed : 0;
+  };
+
+  const extractedName = extractString(/"name"\s*:\s*\{[^}]*"value"\s*:\s*"([^"]*)"/s) || brandName;
+  const industry = extractString(/"industry"\s*:\s*"([^"]*)"/s);
+
+  if (!normalized.includes('brand_elements') && !industry && extractedName === brandName) {
+    return null;
+  }
+
+  return {
+    ...fallback,
+    industry,
+    brand_elements: {
+      ...fallback.brand_elements,
+      name: coerceScoredObject(fallback.brand_elements.name, {
+        value: extractedName,
+        meaning: extractString(/"name"\s*:\s*\{[^}]*"meaning"\s*:\s*"([^"]*)"/s),
+        memorability_score: extractNumber(/"name"\s*:\s*\{[^}]*"memorability_score"\s*:\s*(\d+(?:\.\d+)?)/s),
+        fit_score: extractNumber(/"name"\s*:\s*\{[^}]*"fit_score"\s*:\s*(\d+(?:\.\d+)?)/s)
+      })
+    },
+    notes: [
+      'Partial recovery used because the model returned malformed JSON. Review results carefully.'
+    ]
+  };
+};
+
 const getErrorCategory = (error: unknown) => {
   const message = error instanceof Error ? error.message : String(error);
   if (message.includes('GEMINI_API_KEY')) return 'missing_api_key';
@@ -307,7 +370,17 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           }
         });
 
-        const parsed = parseInventoryResponse(sanitizeJsonText(extractJsonBlock(response.text)));
+        let parsed: InventoryData;
+
+        try {
+          parsed = parseInventoryResponse(sanitizeJsonText(extractJsonBlock(response.text)));
+        } catch (parseError) {
+          const salvaged = salvageInventoryResponse(response.text, currentBrand);
+          if (!salvaged) {
+            throw parseError;
+          }
+          parsed = salvaged;
+        }
 
         return {
           brandName: currentBrand,
