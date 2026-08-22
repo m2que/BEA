@@ -525,6 +525,12 @@ textarea {
   color: #4f46e5;
 }
 
+.loading-orb {
+  width: 108px;
+  height: 108px;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.96), rgba(238, 242, 255, 0.92));
+}
+
 .empty-state-panel .trust-grid {
   margin-top: 22px;
 }
@@ -542,12 +548,20 @@ textarea {
 }
 
 .loading-spinner {
-  width: 24px;
-  height: 24px;
-  border: 3px solid rgba(79, 70, 229, 0.18);
+  width: 60px;
+  height: 60px;
+  border: 5px solid rgba(79, 70, 229, 0.16);
   border-top-color: #4f46e5;
+  border-right-color: #10b981;
+  border-bottom-color: #f59e0b;
   border-radius: 999px;
   animation: spin 0.9s linear infinite;
+}
+
+.loading-elapsed {
+  margin-top: 8px;
+  font-weight: 700;
+  color: #334155;
 }
 
 .support-reference-callout {
