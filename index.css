@@ -1,4 +1,4 @@
-@import './index copy.css';
+@import './styles/marketlearn-system.css';
 
 :root {
   --score-weak: #ef4444;
@@ -309,6 +309,18 @@ textarea {
   background: #f8fafc;
   border: 1px solid #e2e8f0;
   border-radius: 10px;
+}
+
+.element-card {
+  overflow: hidden;
+}
+
+.element-card::before {
+  content: '';
+  display: block;
+  height: 6px;
+  margin: -18px -18px 18px;
+  background: var(--element-stripe-color, #4f46e5);
 }
 
 .report-hero-card,

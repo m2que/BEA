@@ -1,7 +1,7 @@
 import React from 'react';
 import { LogoImage, PlayableAudio } from './MediaAsset';
 import StrengthDial from './StrengthDial';
-import { CompassIcon, SignalIcon, SwatchIcon } from './icons';
+import { CompassIcon, SignalIcon, SwatchIcon } from './marketlearn/marketlearn-icons';
 import type { BrandElements } from '../types.ts';
 
 interface AnalysisTableProps {
@@ -43,6 +43,29 @@ const getElementIntro = (key: string) => {
       return 'Trademark and patent signals that help defend brand assets.';
     default:
       return 'Structured analysis for this brand element.';
+  }
+};
+
+const getElementStripeColor = (key: string) => {
+  switch (key) {
+    case 'name':
+      return '#4f46e5';
+    case 'logo_symbol':
+      return '#0d9488';
+    case 'slogan_tagline':
+      return '#f59e0b';
+    case 'characters_mascots':
+      return '#8b5cf6';
+    case 'sonic_assets':
+      return '#ef4444';
+    case 'packaging':
+      return '#10b981';
+    case 'urls_domains':
+      return '#0891b2';
+    case 'brand_protection':
+      return '#f97316';
+    default:
+      return '#4f46e5';
   }
 };
 
@@ -238,7 +261,7 @@ const AnalysisTable: React.FC<AnalysisTableProps> = ({ brandElements, brandName,
           const typedElement = typeof element === 'object' && element !== null ? element as Record<string, unknown> : {};
 
           return (
-            <article key={key} className="element-card">
+            <article key={key} className="element-card" style={{ '--element-stripe-color': getElementStripeColor(key) } as React.CSSProperties}>
               <div className="element-card-top">
                 <div>
                   <p className="element-card-kicker">{formatLabel(key)}</p>

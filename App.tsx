@@ -5,11 +5,11 @@ import CompetitiveLandscape from './components/CompetitiveLandscape';
 import ErrorDisplay from './components/ErrorDisplay';
 import LoadingIndicator from './components/LoadingIndicator';
 import MarketLearnHeader from './components/MarketLearnHeader';
-import TemplateGuidePage from './components copy/TemplateGuidePage';
+import TemplateGuidePage from './components/marketlearn/MarketLearnToolTemplate';
 import { AVAILABLE_MODELS, DEFAULT_MODEL, analyzeBrands } from './services/geminiService.ts';
 import { buildAnalyzeBrandsPayload } from './lib/bea.ts';
 import type { AnalysisResult, GeminiModelOption } from './types.ts';
-import { ChartBarIcon } from './components/icons';
+import { ChartBarIcon } from './components/marketlearn/marketlearn-icons';
 
 const App: React.FC = () => {
   const [requestedBrandName, setRequestedBrandName] = useState('');

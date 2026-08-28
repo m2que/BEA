@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import type { GeminiModelOption, ModelOption } from '../types.ts';
 import IconBadge from './IconBadge';
-import { ChartBarIcon } from './icons';
+import { ChartBarIcon } from './marketlearn/marketlearn-icons';
 
 interface BrandInputFormProps {
   isLoading: boolean;
