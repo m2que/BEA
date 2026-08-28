@@ -1,5 +1,5 @@
 import React from 'react';
-import { AlertTriangleIcon } from './marketlearn/marketlearn-icons';
+import { AlertTriangleIcon } from './icons';
 
 interface ErrorDisplayProps {
   message: string;

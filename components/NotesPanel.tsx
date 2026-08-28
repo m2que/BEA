@@ -1,5 +1,5 @@
 import React from 'react';
-import { DocumentIcon } from './marketlearn/marketlearn-icons';
+import { DocumentIcon } from './icons';
 
 interface NotesPanelProps {
   notes: string[];

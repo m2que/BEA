@@ -1,12 +1,12 @@
 import React from 'react';
-import MarketLearnIconBase from './MarketLearnIconBase';
-import { BrandElementIcon, ChartBarIcon } from './marketlearn-icons';
+import AppIcon from '../components/AppIcon';
+import { BrandElementIcon, ChartBarIcon } from '../components/icons';
 
 const SearchIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
-  <MarketLearnIconBase strokeWidth={1.8} {...props}>
+  <AppIcon strokeWidth={1.8} {...props}>
     <circle cx="11" cy="11" r="6.5" />
     <path d="M16 16L21 21" />
-  </MarketLearnIconBase>
+  </AppIcon>
 );
 
 const TemplateGuidePage: React.FC = () => {

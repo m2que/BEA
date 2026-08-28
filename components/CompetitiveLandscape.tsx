@@ -1,6 +1,6 @@
 import React from 'react';
 import type { AnalysisResult } from '../types.ts';
-import { LayersIcon } from './marketlearn/marketlearn-icons';
+import { LayersIcon } from './icons';
 
 interface CompetitiveLandscapeProps {
   results: AnalysisResult[];

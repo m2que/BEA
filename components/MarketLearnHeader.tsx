@@ -1,6 +1,6 @@
 import React from 'react';
-import { BrandElementIcon, ChartBarIcon } from './marketlearn/marketlearn-icons';
-import MarketLearnIconTile from './marketlearn/MarketLearnIconTile';
+import { BrandElementIcon, ChartBarIcon } from './icons';
+import IconTile from './IconTile';
 
 interface MarketLearnHeaderProps {
   title: string;
@@ -33,7 +33,7 @@ const MarketLearnHeader: React.FC<MarketLearnHeaderProps> = ({
         <div className="page-header-aside">
           <article className="template-guide-how-card header-note-card">
             <div className="template-guide-how-header how-to-use-stack">
-              <MarketLearnIconTile className="template-guide-how-icon header-note-icon"><BrandElementIcon /></MarketLearnIconTile>
+              <IconTile className="template-guide-how-icon header-note-icon"><BrandElementIcon /></IconTile>
               <p className="template-guide-eyebrow">How To Use It</p>
             </div>
 

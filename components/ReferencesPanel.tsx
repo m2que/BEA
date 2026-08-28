@@ -1,6 +1,6 @@
 import React from 'react';
 import type { CategorizedReferences, ReferenceCategory } from '../types.ts';
-import { DocumentIcon, ExternalLinkIcon } from './marketlearn/marketlearn-icons';
+import { DocumentIcon, ExternalLinkIcon } from './icons';
 
 const categoryLabels: Record<ReferenceCategory, string> = {
   official_brand: 'Official Brand',

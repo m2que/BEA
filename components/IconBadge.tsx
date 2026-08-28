@@ -1,6 +1,6 @@
 import React from 'react';
-import { BrandElementIcon } from './marketlearn/marketlearn-icons';
-import MarketLearnIconTile from './marketlearn/MarketLearnIconTile';
+import { BrandElementIcon } from './icons';
+import IconTile from './IconTile';
 
 interface IconBadgeProps {
   label: string;
@@ -10,9 +10,9 @@ interface IconBadgeProps {
 const IconBadge: React.FC<IconBadgeProps> = ({ label, className = '' }) => {
   return (
     <div className={`input-badge ${className}`.trim()}>
-      <MarketLearnIconTile className="input-badge-tile">
+      <IconTile className="input-badge-tile">
         <BrandElementIcon />
-      </MarketLearnIconTile>
+      </IconTile>
       <span>{label}</span>
     </div>
   );
