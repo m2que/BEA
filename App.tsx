@@ -112,13 +112,21 @@ const App: React.FC = () => {
         ) : null}
 
         <footer className="page-footer">
+          <a
+            className="page-footer-button"
+            href="https://forms.cloud.microsoft/r/BdSpx03G9i"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Share feedback
+          </a>
           <p>
             &copy; 2026{' '}
             <a href="https://marketlearn.online">MarketLearn</a>
             . AI-assisted content &mdash; verify before implementation.
           </p>
           <p>
-            Contact: <a href="mailto:marketlearn.online@gmail.com">marketlearn.online@gmail.com</a>
+            <a href="mailto:marketlearn.online@gmail.com">Email us</a>
           </p>
         </footer>
       </main>
