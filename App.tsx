@@ -10,6 +10,7 @@ import { AVAILABLE_MODELS, DEFAULT_MODEL, analyzeBrands } from './services/gemin
 import { buildAnalyzeBrandsPayload } from './lib/bea.ts';
 import type { AnalysisResult, GeminiModelOption } from './types.ts';
 import { ChartBarIcon } from './components/icons';
+import { track } from './lib/analytics';
 
 const App: React.FC = () => {
   const [requestedBrandName, setRequestedBrandName] = useState('');
@@ -27,6 +28,7 @@ const App: React.FC = () => {
     setIsLoading(true);
     setError(null);
     setAnalysisResults([]);
+    track('analyze_click', { app_name: 'bea' });
 
     try {
       const results = await analyzeBrands(payload);
@@ -34,6 +36,8 @@ const App: React.FC = () => {
 
       if (results.every((result) => result.inventoryData === null)) {
         setError('All brand analyses failed. Please check your inputs and try again.');
+      } else {
+        track('analyze_success', { app_name: 'bea', model });
       }
     } catch (requestError) {
       console.error(requestError);
